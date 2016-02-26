@@ -9,13 +9,13 @@ var Context = function (context, options) {
     return this;
 }
 
-var contexts = [new Context("all", { caption: "page  link" }), new Context("selection"), new Context("link"), new Context("image"), new Context("video"),
-    new Context("audio")];
+var contexts = [new Context("all", { caption: "page  link" }), new Context("selection"), new Context("image"), new Context("video")];
 
 var contextMenuClickHandlers = new Map();
 var contextMenuItemsAdditionalInfo = new Map();
 contextMenuClickHandlers.set("all", pageLinkHandler);
 contextMenuClickHandlers.set("image", imageHandler);
+contextMenuClickHandlers.set("selection", selectionHandler);
 
 function defaultHandler() {
     console.log("Default handler");
@@ -25,14 +25,11 @@ function initFriendsMenu(parent, context) {
     var child1 = chrome.contextMenus.create({ "title": "Friend1", "parentId": parent, "contexts": [context], "onclick": contextMenuClickHandlers.has(context) ? contextMenuClickHandlers.get(context) : defaultHandler });
     contextMenuItemsAdditionalInfo.set(child1, { name: "asdf" });
     var child2 = chrome.contextMenus.create({ "title": "Friend2", "parentId": parent, "contexts": [context], "onclick": contextMenuClickHandlers.has(context) ? contextMenuClickHandlers.get(context) : defaultHandler });
-    console.log("After initFriendsMenu " + context + "    " + parent);
-    console.log("After initFriendsMenu " + child1 + "    " + child2);
 }
 
 
 function pageLinkHandler(info, tab) {
-    console.log(info)
-    alert(contextMenuItemsAdditionalInfo.get(info.menuItemId).name);
+    console.log(contextMenuItemsAdditionalInfo.get(info.menuItemId).name);
     var data = {};
     data.message = info.pageUrl;
     data.domain = "nikita.doyun";
@@ -62,6 +59,14 @@ function imageHandler(info, tab) {
 
         oReq.send();
     });
+}
+
+function selectionHandler(info, tab){
+    console.log(info);
+    var data = {};
+    data.message = info.selectionText;
+    data.domain = "nikita.doyun";
+    invokeVkMethod("messages.send", data);
 }
 
 function invokeVkMethod(method, data) {
@@ -102,7 +107,7 @@ function postImage(url, data) {
 
 for (var i = 0; i < contexts.length; i++) {
     var context = contexts[i];
-    var title = "Send '" + context.caption + "'";
+    var title = "Send " + context.caption;
     var id = chrome.contextMenus.create({ "title": title, "contexts": [context.context] });
     console.log("Before initFriendsMenu " + context.context + " " + id);
     initFriendsMenu(id, context.context);
