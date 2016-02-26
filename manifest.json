@@ -1,0 +1,37 @@
+{
+    "name": "Content sharing",
+    "version": "0.1",
+    "description": "Etention for sharing links and content with friends in social networks",
+    "permissions": [
+        "tabs",
+        "bookmarks",
+        "contextMenus",
+        "storage",
+        "downloads",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "browser_action": {
+        "default_title": "Content sharing",
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://oauth.vk.com/blank.html*"
+            ],
+            "js": [
+                "set-vk-token.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "jquery-2.2.0.min.js",
+            "sample.js"
+        ]
+    },
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}
