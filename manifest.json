@@ -29,6 +29,8 @@
     "background": {
         "scripts": [
             "jquery-2.2.0.min.js",
+            "recepient.js",
+            "vk.js",
             "sample.js"
         ]
     },

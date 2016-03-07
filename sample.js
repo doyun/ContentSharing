@@ -16,6 +16,7 @@ var contextMenuItemsAdditionalInfo = new Map();
 contextMenuClickHandlers.set("all", pageLinkHandler);
 contextMenuClickHandlers.set("image", imageHandler);
 contextMenuClickHandlers.set("selection", selectionHandler);
+contextMenuClickHandlers.set("video", videoHandler);
 
 function defaultHandler() {
     console.log("Default handler");
@@ -62,48 +63,16 @@ function imageHandler(info, tab) {
 }
 
 function selectionHandler(info, tab){
-    console.log(info);
     var data = {};
     data.message = info.selectionText;
     data.domain = "nikita.doyun";
     invokeVkMethod("messages.send", data);
 }
 
-function invokeVkMethod(method, data) {
-    var url = "https://api.vk.com/method/" + method;
-    var deferred = new $.Deferred();
-    chrome.storage.sync.get('vkaccess_token', function (items) {
-        data.access_token = items.vkaccess_token;
-        $.get(url, data)
-            .done(function (data) {
-                deferred.resolve(data);
-            })
-            .fail(function (data) {
-                deferred.reject(data);
-            });
-    });
-    return deferred;
+function videoHandler(info, tab){
+    console.log(info);
+    var data = {};
 }
-
-function postImage(url, data) {
-    var deferred = new $.Deferred();
-    $.ajax({
-        url: url,
-        data: data,
-        cache: false,
-        contentType: false,
-        processData: false,
-        type: 'POST',
-        success: function (data) {
-            deferred.resolve(data);
-        },
-        fail: function (data) {
-            deferred.reject(data);
-        }
-    });
-    return deferred;
-}
-
 
 for (var i = 0; i < contexts.length; i++) {
     var context = contexts[i];
