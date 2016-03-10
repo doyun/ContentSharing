@@ -1,26 +1,39 @@
 <html>
 
 <head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 </head>
 
-<body style="width: 400px">
-    <div>Hi!</div>
-    <a href="#" class="vk-login">Login Vk</a>
-    <div class="list-container">
-        <form id="receipents-form">
-            <ul class="select-list friend-list">
-                
-            </ul>
-            <ul class="select-list chat-list">
+<body style="width: 500px">
+    <div class="container">
+        <a href="#" class="vk-login waves-effect waves-light btn">Login Vk</a>
+        <div class="list-container">
+            <form id="receipents-form">
+                <div class="row">
+                    <div class="col s6">
+                        <ul class="select-list friend-list collection">
 
-            </ul>
-        </form>
+                        </ul>
+                    </div>
+
+                    <div class="col s6">
+                        <ul class="select-list chat-list collection">
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 
-<script src="jquery-2.2.0.min.js"></script>
-<script src="recepient.js"></script>
-<script src="popup.js"></script>
-<script src="vk.js"></script>
+<script src="js/jquery-2.2.0.min.js"></script>
+<script src="js/recepient.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/context-menu.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/vk.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 
 </html>

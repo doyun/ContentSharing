@@ -22,16 +22,18 @@
                 "*://oauth.vk.com/blank.html*"
             ],
             "js": [
-                "set-vk-token.js"
+                "js/set-vk-token.js"
             ]
         }
     ],
     "background": {
         "scripts": [
-            "jquery-2.2.0.min.js",
-            "recepient.js",
-            "vk.js",
-            "sample.js"
+            "js/jquery-2.2.0.min.js",
+            "js/recepient.js",
+            "js/storage.js",
+            "js/vk.js",
+            "js/context-menu.js",
+            "js/sample.js"
         ]
     },
     "manifest_version": 2,
